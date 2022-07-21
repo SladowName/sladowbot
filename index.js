@@ -1,6 +1,10 @@
 const TelegramApi = require('node-telegram-bot-api');
 const { gameOptions, againOptions } = require('./options');
 require('dotenv').config();
+const express = require('express');
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 const bot = new TelegramApi(process.env.TELEGRAM_API_TOKEN, {polling: true});
 
@@ -53,3 +57,11 @@ const start = async () => {
 }
 
 start();
+
+app.get('*/', (req, res) => {
+    res.send('Hello');
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
